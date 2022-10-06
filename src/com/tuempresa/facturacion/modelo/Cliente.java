@@ -18,4 +18,6 @@ public class Cliente {
     @Required 
     String nombre;
 
+    @Embedded @NoFrame
+    private Direccion direccion;
 }
