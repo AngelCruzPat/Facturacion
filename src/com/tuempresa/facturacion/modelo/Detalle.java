@@ -26,7 +26,6 @@ public class Detalle {
         if (precioPorUnidad	 == null) return BigDecimal.ZERO;
         return new BigDecimal(cantidad).multiply(precioPorUnidad);
     }
-    
     @DefaultValueCalculator(
     	    value=CalculadorPrecioPorUnidad.class, 
     	    properties=@PropertyValue(
