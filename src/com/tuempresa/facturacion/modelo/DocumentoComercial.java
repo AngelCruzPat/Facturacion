@@ -84,7 +84,4 @@ abstract public class DocumentoComercial extends Identificable {
     @Calculation("sum(detalles.importe) + iva")    
     BigDecimal importeTotal; 
     
- 
-    
-    
 }
