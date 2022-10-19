@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
-<project name="Facturacion" basedir="." default="desplegarWar">
+<project name="Facturacion_3ro" basedir="." default="desplegarWar">
 
-	<property name="project" value="Facturacion" />
+	<property name="project" value="Facturacion_3ro" />
 	<property name="ox3" value="true" />
 	<property name="openxava.base.dir" value=".."/> <!-- Cámbialo si quieres OpenXava y Addons en otra carpeta -->
 	<property file="../openxava.properties"/>

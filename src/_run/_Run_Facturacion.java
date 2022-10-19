@@ -11,8 +11,8 @@ import org.openxava.util.*;
 public class _Run_Facturacion {
 
 	public static void main(String[] args) throws Exception {
-		DBServer.start("FacturacionDB"); // Para usar tu propia base de datos comenta esta línea y configura web/META-INF/context.xml
-		AppServer.run("Facturacion"); // Usa AppServer.run("") para funcionar en el contexto raíz
+		DBServer.start("Facturacion_3roDB"); // Para usar tu propia base de datos comenta esta línea y configura web/META-INF/context.xml
+		AppServer.run("Facturacion_3ro"); // Usa AppServer.run("") para funcionar en el contexto raíz
 	}
 
 }

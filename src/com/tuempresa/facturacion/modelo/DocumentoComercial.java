@@ -1,10 +1,12 @@
 package com.tuempresa.facturacion.modelo;
- 
+
+import java.math.*;
 import java.time.*;
 import java.util.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.*;
 
 import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
@@ -14,16 +16,20 @@ import com.tuempresa.facturacion.calculadores.*;
 
 import lombok.*;
  
+
+
 @Entity @Getter @Setter
+
 @View(members=
-"anyo, numero, fecha," +
-"datos {" +
-    "cliente;" +
-    "detalles;" +
-    "observaciones" +
-"}"
+	"anyo, numero, fecha," +
+	   "datos{" +
+		"cliente;" +
+		"detalles;" +
+		"observaciones" +
+		"}"
 )
-abstract public class DocumentoComercial extends Identificable{
+abstract public class DocumentoComercial extends Identificable {
+	
 
     @Id
     @GeneratedValue(generator="system-uuid")
@@ -38,25 +44,47 @@ abstract public class DocumentoComercial extends Identificable{
  
     @Column(length=6)
     @DefaultValueCalculator(value=CalculadorSiguienteNumeroParaAnyo.class,
-        properties=@PropertyValue(name="anyo")
-    )
+        properties=@PropertyValue(name="anyo"))
     int numero;
  
     @Required
     @DefaultValueCalculator(CurrentLocalDateCalculator.class)
     LocalDate fecha;
-    
+ 
     @ManyToOne(fetch=FetchType.LAZY, optional=false)
     @ReferenceView("Simple")
     Cliente cliente;
     
-    @OneToMany(mappedBy="factura")
-    Collection<Pedido> pedidos;
     
-    @ElementCollection
-    @ListProperties("producto.numero, producto.descripcion, cantidad")
-    Collection<Detalle> detalles;
+    @Stereotype("MEMO")
+    String observaciones;
     
-    @TextArea
-    String observaciones; 
+	@ElementCollection
+    @ListProperties(
+        "producto.numero, producto.descripcion, cantidad, precioPorUnidad, " +
+        "importe+[" + 
+        	"documentoComercial.porcentajeIVA," +
+        	"documentoComercial.iva," +
+        	"documentoComercial.importeTotal" +
+        "]" 
+    )	
+    private Collection<Detalle> detalles;
+
+	@DefaultValueCalculator(CalculadorPorcentajeIVA.class)
+    @Digits(integer=2, fraction=0)
+    BigDecimal porcentajeIVA;
+       
+    @ReadOnly
+    @Money
+    @Calculation("sum(detalles.importe) * porcentajeIVA / 100")
+    BigDecimal iva;
+
+    @ReadOnly
+    @Money
+    @Calculation("sum(detalles.importe) + iva")    
+    BigDecimal importeTotal; 
+    
+ 
+    
+    
 }

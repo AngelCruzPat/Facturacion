@@ -1,5 +1,5 @@
 package com.tuempresa.facturacion.modelo;
- 
+
 import java.util.*;
 
 import javax.persistence.*;
@@ -20,7 +20,7 @@ public class Autor {
  
     @Column(length=50) @Required
     String nombre;
- 
+  
     @OneToMany(mappedBy="autor")
     @ListProperties("numero, descripcion, precio")
     Collection<Producto> productos;

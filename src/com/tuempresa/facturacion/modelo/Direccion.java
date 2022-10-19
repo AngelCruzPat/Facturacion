@@ -1,5 +1,5 @@
 package com.tuempresa.facturacion.modelo;
- 
+
 import javax.persistence.*;
 
 import lombok.*;

@@ -1,5 +1,5 @@
 package com.tuempresa.facturacion.modelo;
- 
+
 import java.util.*;
 
 import javax.persistence.*;
@@ -10,19 +10,20 @@ import lombok.*;
  
 @Entity @Getter @Setter
 @View(extendsView="super.DEFAULT", 
-members="pedidos { pedidos }" 
+members="pedidos { pedidos }"
+
 )
 @View( name="SinClienteNiPedidos",
-members=   
+members=                      
     "anyo, numero, fecha;" + 
     "detalles;" +
     "observaciones"
 )
-public class Factura extends DocumentoComercial {
- 
+public class Factura extends DocumentoComercial {	
 	
-	 @OneToMany(mappedBy="factura")
-	    @CollectionView("SinClienteNiFactura")
-	    private Collection<Pedido> pedidos;
+	@OneToMany(mappedBy="factura")
+    @CollectionView("SinClienteNiFactura")
+    private Collection<Pedido> pedidos;
+	
 	
 }

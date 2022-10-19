@@ -4,19 +4,22 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
-@Entity
+import lombok.*;
+
+@Entity @Getter @Setter 
 @View(extendsView="super.DEFAULT",
-members="factura { factura } " 
+members="factura { factura } "
 )
-
-
+@View( name="SinClienteNiFactura",
+members=                       
+    "anyo, numero, fecha;" +
+    "detalles;" +
+    "observaciones"
+)
 public class Pedido extends DocumentoComercial {
+	 
+	@ManyToOne
+    @ReferenceView("SinClienteNiPedidos")
+    private Factura factura;
 	
-	
-	  @ManyToOne
-	    @ReferenceView("SinClienteNiPedidos")
-	    private Factura factura;
-    
-
-
 }
