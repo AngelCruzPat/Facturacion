@@ -33,7 +33,7 @@ public class PreferenciasFacturacion {
         }
         return propiedades;
     }
- 
+    	
     public static BigDecimal getPorcentajeIVADefecto() {
         return new BigDecimal(getPropiedades().getProperty("porcentajeIVADefecto"));
     }
