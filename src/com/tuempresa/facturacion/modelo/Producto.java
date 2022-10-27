@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.openxava.annotations.*;
 
+import com.tuempresa.facturacion.anotaciones.*;
+
 import lombok.*;
  
 @Entity @Getter @Setter
@@ -36,6 +38,6 @@ public class Producto {
     @TextArea
     String observaciones;
     
-    @Column(length=13)
+    @Column(length=13) @ISBN
     String isbn;
 }
