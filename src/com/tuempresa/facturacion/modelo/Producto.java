@@ -38,6 +38,7 @@ public class Producto {
     @TextArea
     String observaciones;
     
-    @Column(length=13) @ISBN
+    @Column(length=13) 
+    @ISBN(buscar=false)
     String isbn;
 }
