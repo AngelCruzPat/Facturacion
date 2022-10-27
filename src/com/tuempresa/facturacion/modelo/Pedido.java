@@ -68,7 +68,7 @@ public class Pedido extends DocumentoComercial {
 	
 	@PreRemove
 	private void validarPreBorrar() {
-	    if (factura != null) {
+	    if (factura != null) {	
 	        throw new javax.validation.ValidationException(
 	            XavaResources.getString(
 	                "no_puede_borrar_pedido_con_factura"));
